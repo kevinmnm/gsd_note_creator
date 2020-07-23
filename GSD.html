@@ -296,6 +296,7 @@
             user-select: none;
             background-color: rgb(57, 100, 57);
             width: 100px;
+            opacity: 0.4;
         }
         #avayaB:active{
             box-shadow: 0 0 5px inset;
@@ -472,11 +473,11 @@
         var weekSelecTxt = [];
 
         function genCopy() {
-            if (escalate.value == 'No') {
+            if (escalate.value === 'No') {
                 final.value = 'Request: Ticket' + '\n' + 'Case Status: ' + 'RESOLVED' + '\n' + 'WIN: ' + win.value + '\n' + 'Phone: ' + phone.value + '\n' + 'Site: ' + site.value + '\n\n' + 'Issue/Action: ' + issue.value + '\n\n' + 'Thank you.';
                 final.select();
                 document.execCommand('copy');
-            } else {
+            } else if (escalate.value == 'Yes') {
                 final.value = 'Request: Callback' + '\n' + 'Case Status: ESCALATE' + '\n' + 'WIN: ' + win.value + '\n' + 'Phone: ' + phone.value + '\n' + 'Site: ' + site.value + '\n\n' + 'Issue: ' + issue.value + '\n\n' + avayaTxt() + "Agent's Shift: " + tFrom.value + ' - ' + tTo.value + '\n' + 'Off Days: ' + weekSelecTxt.join(', ') + '\n\n' + 'Thank you.';
                 final.select();
                 document.execCommand('copy');
@@ -484,7 +485,7 @@
         }
 
         function avayaTxt(){
-            if (avayaB.style.opacity !== '0.4'){
+            if (extensions[0].style.opacity === '1'){
                 extensionVal1 = extensions[1].value;
                 extensionVal2 = extensions[2].value;
                 return 'Avaya Extensions: ' + '\n' + extensionVal1 + '\n' + extensionVal2 + '\n\n';
